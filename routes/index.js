@@ -27,7 +27,7 @@ router.get('/7d', function(req, res, next) {
         }
       });
     });
-    fs.writeFileSync("parsingFiles/7D/7d.json", JSON.stringify(brandsUrl), function(err){
+    fs.writeFile("parsingFiles/7D/7d.json", JSON.stringify(brandsUrl), function(err){
       if(err) console.error(err); // если возникла ошибка
       console.log("Асинхронная запись файла завершена. Содержимое файла:");
       BrandPage();
@@ -37,6 +37,10 @@ router.get('/7d', function(req, res, next) {
 
 router.get('/7dPage', (req, res, next) => {
     BrandPage();
+});
+
+router.get('/7dItems', (req, res, next) => {
+    getItem();
 });
  function BrandPage(url='', name='') {
    fs.readFile('parsingFiles/7D/7d.json', 'utf8', (err, data) => {
@@ -52,36 +56,45 @@ router.get('/7dPage', (req, res, next) => {
          array.map((i, el) => {
            listURL[i]= {url: el.attribs['href'], name: parseData[key].name }
          });
-         fs.writeFileSync(`parsingFiles/7D/7d_${parseData[key].name.split('/')[0]}_listURL.json`, JSON.stringify(listURL), function(error){
+         fs.writeFile(`parsingFiles/7D/7d_${parseData[key].name.split('/')[0]}_listURL.json`, JSON.stringify(listURL), function(error){
            if(error) throw error; // если возникла ошибка
-           getItem();
+           console.log(`Асинхронная запись файла ${parseData[key].name}завершена.`);
+           getItem(parseData[key].name);
          })
        })
      }
    })
  }
 
- function getItem() {
-   brands.map((brand, index)=>{
-     fs.readFile(`parsingFiles/7D/7d_${brand.split('/')[0]}_listUrl.json`, 'utf8', (err, data) => {
+ function getItem(nameBrand) {
+     fs.readFile(`parsingFiles/7D/7d_${nameBrand.split('/')[0]}_listUrl.json`, 'utf8', (err, data) => {
        if(err) console.error(err);
-       let listItems = {};
-       const listData = JSON.parse(data);
-        for (let key in listData) {
-         parseItemPage(listData[key])
-             .then((model) => {
-                listItems[key] = model;
-              })
-             .catch((err)=> {
-                console.error(err)
-             })
-       };
-       fs.writeFile(`parsingFiles/7D/7d_${brand.split('/')[0]}_Items.json`, JSON.stringify(listItems), function(error){
-         if(error) throw error; // если возникла ошибка
-       })
+       parseItemPagePromise(JSON.parse(data)).then((returnedData)=>{
+         fs.writeFile(`parsingFiles/7D/7d_${nameBrand.split('/')[0]}_Items.json`, JSON.stringify(returnedData), function(error){
+           if(error) throw error; // если возникла ошибка
+           console.error(`Запись файла ${nameBrand.split('/')[0]} завершена`);
+         })
+       });
      })
-   })
  }
+
+ function parseItemPagePromise(listData) {
+   return new Promise ((resolve, reject) => {
+     let listItems = {};
+     for (let key in listData) {
+       parseItemPage(listData[key])
+           .then((model) => {
+             listItems[key] = model;
+             if (Object.keys(listData).length === Object.keys(listItems).length) resolve(listItems)
+           })
+           .catch((err)=> {
+             console.error(err)
+             reject(err);
+           })
+     };
+   });
+ }
+
  function parseItemPage(el) {
    return new Promise((resolve, reject) => {
        request(`https://7d.by/${el.url}`, (err, res, body) => {
@@ -92,16 +105,20 @@ router.get('/7dPage', (req, res, next) => {
            name: $('h1').text(),
            brand: el.name,
            url: el.url,
-           count: '',
+           count: {
+             rubl:$('#price .price-new').clone().children().remove().end().text(),
+             cops: $('#price .price-new').clone().children().text()
+           },
            img: getImageURL(),
            description: ''
          };
          function getImageURL() {
-            console.log('STARTANULLLL!')
            const node = $('[data-fancybox="gallery"] img');
-           for ( let key in node ) {
-              console.log(node[key]);
-           };
+           const listImageUrl =[];
+           node.map((index, el) => {
+             listImageUrl.push(el.attribs['src']);
+           });
+           return listImageUrl
          }
          resolve(modelItem)
        })
