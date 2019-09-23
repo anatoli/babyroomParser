@@ -106,17 +106,17 @@ router.get('/7dItems', (req, res, next) => {
            brand: el.name,
            url: el.url,
            count: {
-             rubl:$('#price .price-new').clone().children().remove().end().text(),
-             cops: $('#price .price-new').clone().children().text()
+             rubl:$('#price .price').clone().children().remove().end().text(),
+             cops: $('#price .price').clone().children().text()
            },
            img: getImageURL(),
-           description: ''
+           description: $('form #buttons~').text()
          };
          function getImageURL() {
            const node = $('[data-fancybox="gallery"] img');
            const listImageUrl =[];
            node.map((index, el) => {
-             listImageUrl.push(el.attribs['src']);
+             listImageUrl.push(`https://7d.by${el.attribs['src']}`);
            });
            return listImageUrl
          }
