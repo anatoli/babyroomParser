@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anatoli.github.io/babyroomParser/sitemap.xml

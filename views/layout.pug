@@ -1,7 +1,51 @@
 doctype html
-html
+html(lang='ru')
   head
-    title= title
+    - var metaTitle = seo && seo.title ? seo.title : (title || 'AI Growth Studio')
+    - var metaDescription = seo && seo.description ? seo.description : 'Интеграция AI-агентов для бизнеса: Nextbot, ElevenLabs и персональные AI-боты.'
+    - var metaKeywords = seo && seo.keywords ? seo.keywords : 'интеграция ai агентов, nextbot, elevenlabs, ai боты для бизнеса'
+    - var metaRobots = seo && seo.robots ? seo.robots : 'index, follow'
+    - var canonicalHref = seo && seo.canonical ? seo.canonical : ''
+    - var metaOgType = seo && seo.ogType ? seo.ogType : 'website'
+    - var metaOgLocale = seo && seo.locale ? seo.locale : 'ru_RU'
+    - var metaOgTitle = seo && seo.ogTitle ? seo.ogTitle : metaTitle
+    - var metaOgDescription = seo && seo.ogDescription ? seo.ogDescription : metaDescription
+    - var metaOgUrl = seo && seo.ogUrl ? seo.ogUrl : canonicalHref
+    - var metaOgSiteName = seo && seo.siteName ? seo.siteName : 'AI Growth Studio'
+    - var metaOgImage = seo && seo.ogImage ? seo.ogImage : ''
+    - var metaTwitterCard = seo && seo.twitterCard ? seo.twitterCard : 'summary_large_image'
+    - var metaTwitterTitle = seo && seo.twitterTitle ? seo.twitterTitle : metaTitle
+    - var metaTwitterDescription = seo && seo.twitterDescription ? seo.twitterDescription : metaDescription
+    - var metaTwitterImage = seo && seo.twitterImage ? seo.twitterImage : metaOgImage
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= metaTitle
+    meta(name='description', content=metaDescription)
+    meta(name='keywords', content=metaKeywords)
+    meta(name='robots', content=metaRobots)
+    meta(name='googlebot', content=metaRobots)
+    meta(name='theme-color', content='#090812')
+    if canonicalHref
+      link(rel='canonical', href=canonicalHref)
+    meta(property='og:type', content=metaOgType)
+    meta(property='og:locale', content=metaOgLocale)
+    meta(property='og:title', content=metaOgTitle)
+    meta(property='og:description', content=metaOgDescription)
+    if metaOgUrl
+      meta(property='og:url', content=metaOgUrl)
+    meta(property='og:site_name', content=metaOgSiteName)
+    if metaOgImage
+      meta(property='og:image', content=metaOgImage)
+      meta(property='og:image:width', content='1200')
+      meta(property='og:image:height', content='630')
+      meta(property='og:image:alt', content='AI Growth Studio - интеграция AI-агентов для бизнеса')
+    meta(name='twitter:card', content=metaTwitterCard)
+    meta(name='twitter:title', content=metaTwitterTitle)
+    meta(name='twitter:description', content=metaTwitterDescription)
+    if metaTwitterImage
+      meta(name='twitter:image', content=metaTwitterImage)
     link(rel='stylesheet', href='/stylesheets/style.css')
+    if structuredData
+      script(type='application/ld+json')!= structuredData
   body
     block content

@@ -1,5 +1,47 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  main.page
+    section.hero
+      .hero__main
+        span.hero__badge AI Automation Studio
+        h1= title
+        p= subtitle
+        .hero__actions
+          a.btn.btn--primary(href="#contact") Запросить стратегию
+          a.btn.btn--ghost(href="#services") Посмотреть услуги
+      .hero__metrics
+        each metric in metrics
+          .metric
+            strong= metric.value
+            span= metric.label
+
+    section.section#services
+      h2 Ключевые компетенции команды
+      p.section__lead Мы строим решения под KPI бизнеса: больше заявок, выше конверсия и меньше рутинной нагрузки на сотрудников.
+      .grid.grid--3
+        each service in services
+          article.card
+            h3= service.title
+            p= service.description
+
+    section.section.section--process
+      h2 Как проходит внедрение
+      ul.checklist
+        each step in process
+          li= step
+
+    section.section
+      h2 Что вы получаете
+      .grid.grid--3
+        each item in highlights
+          article.card
+            h3 Результат
+            p= item
+
+    section.section#contact
+      .cta
+        h2 Запустим AI-агента, который начнет приносить заявки уже на первом этапе
+        p Мы фокусируемся на внедрении, которое окупается: измеримые KPI, прозрачный pipeline и поддержка после релиза.
+        p.cta__line hello@ai-growth.studio
+      p.footer AI Growth Studio · Nextbot · ElevenLabs · Персональные AI-боты

@@ -1,130 +1,140 @@
 var express = require('express');
+
 var router = express.Router();
-var request = require('request');
-var cheerio = require('cheerio');
-var resolve = require('url').resolve;
-var fs = require('fs');
-let brands = ['Cybex', 'GB', 'RÖMER/BRITAX'];
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+function getBaseUrl(req) {
+  var forwardedProto = req.headers['x-forwarded-proto'];
+  var protocol = forwardedProto ? forwardedProto.split(',')[0] : req.protocol;
 
-router.get('/7d', function(req, res, next) {
-  var URL = 'https://7d.by/catalog/kolyaski';
-  request(URL, function (err, res2, body) {
-    if (err) console.error(err);
-    let brandsUrl = {};
-    var $ = cheerio.load(body);
-    brands.map((brand, index)=>{
-      var value = $('[name="ms|vendor"]').find(`option:contains(${brand.toUpperCase()})`).val();
-      var text = $('[name="ms|vendor"]').find(`option:contains(${brand.toUpperCase()})`).text();
-      $('[name="ms|vendor"] ').children().map((index2, el)=>{
-        // var text = el.children[0].data;
-        if (text.toUpperCase().indexOf(brand.toUpperCase()) !== -1 ) {
-          brandsUrl[brand]={name: brand, value: value, url:'https://7d.by/catalog/kolyaski?ms|vendor='+value };
-        }
-      });
-    });
-    fs.writeFile("parsingFiles/7D/7d.json", JSON.stringify(brandsUrl), function(err){
-      if(err) console.error(err); // если возникла ошибка
-      console.log("Асинхронная запись файла завершена. Содержимое файла:");
-      BrandPage();
-    });
+  return protocol + '://' + req.get('host');
+}
+
+function buildStructuredData(baseUrl) {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'AI Growth Studio',
+      url: baseUrl,
+      email: 'hello@ai-growth.studio',
+      sameAs: [
+        baseUrl
+      ]
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: 'AI Growth Studio',
+      description: 'Интеграция AI-агентов для бизнеса: Nextbot, ElevenLabs и персональные AI-боты.',
+      areaServed: 'Worldwide',
+      serviceType: 'AI agent integration',
+      url: baseUrl
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Интеграция AI-агентов для бизнеса',
+      provider: {
+        '@type': 'Organization',
+        name: 'AI Growth Studio'
+      },
+      serviceType: 'Разработка и внедрение AI-ботов',
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/InStock'
+      }
+    }
+  ];
+}
+
+router.get('/', function(req, res) {
+  var baseUrl = getBaseUrl(req);
+  var canonicalUrl = baseUrl + '/';
+  var pageTitle = 'Интеграция AI-агентов для бизнеса | Nextbot и ElevenLabs';
+  var pageDescription = 'Внедряем Nextbot и ElevenLabs, создаем персональные AI-боты для продаж, поддержки и роста конверсии бизнеса 24/7.';
+
+  res.render('index', {
+    title: pageTitle,
+    subtitle: 'Внедряем AI-агентов, которые продают, отвечают и масштабируют вашу команду 24/7.',
+    seo: {
+      title: pageTitle,
+      description: pageDescription,
+      canonical: canonicalUrl,
+      robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+      author: 'AI Growth Studio',
+      themeColor: '#090812',
+      keywords: 'интеграция ai агентов, nextbot, elevenlabs, чат-боты для бизнеса, ai автоматизация продаж, персональные ai боты',
+      siteName: 'AI Growth Studio',
+      locale: 'ru_RU',
+      ogType: 'website',
+      ogTitle: pageTitle,
+      ogDescription: pageDescription,
+      ogUrl: canonicalUrl,
+      ogImage: baseUrl + '/images/og-cover.svg',
+      twitterCard: 'summary_large_image',
+      twitterTitle: pageTitle,
+      twitterDescription: pageDescription,
+      twitterImage: baseUrl + '/images/og-cover.svg'
+    },
+    structuredData: JSON.stringify(buildStructuredData(baseUrl)),
+    highlights: [
+      'Nextbot-сценарии для отдела продаж и поддержки',
+      'Голосовые агенты на ElevenLabs с естественной речью',
+      'Персональные боты под процессы вашей компании'
+    ],
+    services: [
+      {
+        title: 'Запуск Nextbot-воронок',
+        description: 'Строим цепочки диалогов для квалификации лидов, назначения встреч и повторных касаний без потери теплых клиентов.'
+      },
+      {
+        title: 'Интеграция ElevenLabs',
+        description: 'Подключаем голосовых ассистентов в CRM, телефонию и чат-каналы, чтобы клиент получал быстрый и живой ответ в любое время.'
+      },
+      {
+        title: 'Персональные AI-боты',
+        description: 'Проектируем кастомных ботов под FAQ, продажи, обучение команды и внутренние регламенты с учетом вашего tone of voice.'
+      }
+    ],
+    process: [
+      'Аудит процессов: где AI даст максимум прибыли',
+      'Проектирование архитектуры и сценариев диалогов',
+      'Интеграция в сайт, мессенджеры, CRM и телефонию',
+      'Аналитика, оптимизация и рост конверсии'
+    ],
+    metrics: [
+      { value: 'до 62%', label: 'рост скорости первого ответа' },
+      { value: '24/7', label: 'поддержка и обработка заявок' },
+      { value: 'x3', label: 'ускорение квалификации лидов' }
+    ]
   });
 });
 
-router.get('/7dPage', (req, res, next) => {
-    BrandPage();
+router.get('/robots.txt', function(req, res) {
+  var baseUrl = getBaseUrl(req);
+
+  res.type('text/plain');
+  res.send(
+    'User-agent: *\n' +
+    'Allow: /\n\n' +
+    'Sitemap: ' + baseUrl + '/sitemap.xml\n'
+  );
 });
 
-router.get('/7dItems', (req, res, next) => {
-    getItem();
+router.get('/sitemap.xml', function(req, res) {
+  var baseUrl = getBaseUrl(req);
+
+  res.type('application/xml');
+  res.send(
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    '  <url>\n' +
+    '    <loc>' + baseUrl + '/</loc>\n' +
+    '    <changefreq>weekly</changefreq>\n' +
+    '    <priority>1.0</priority>\n' +
+    '  </url>\n' +
+    '</urlset>\n'
+  );
 });
- function BrandPage(url='', name='') {
-   fs.readFile('parsingFiles/7D/7d.json', 'utf8', (err, data) => {
-     if (err) console.error(err);
-     console.log(data);
-     const parseData = JSON.parse(data);
-     for (let key in parseData) {
-       request(`${parseData[key].url}`, (err, res, body) => {
-         if (err) throw err;
-         let $ = cheerio.load(body);
-         let listURL = {};
-         let array = $('.col-md-4 .text-center');
-         array.map((i, el) => {
-           listURL[i]= {url: el.attribs['href'], name: parseData[key].name }
-         });
-         fs.writeFile(`parsingFiles/7D/7d_${parseData[key].name.split('/')[0]}_listURL.json`, JSON.stringify(listURL), function(error){
-           if(error) throw error; // если возникла ошибка
-           console.log(`Асинхронная запись файла ${parseData[key].name}завершена.`);
-           getItem(parseData[key].name);
-         })
-       })
-     }
-   })
- }
-
- function getItem(nameBrand) {
-     fs.readFile(`parsingFiles/7D/7d_${nameBrand.split('/')[0]}_listUrl.json`, 'utf8', (err, data) => {
-       if(err) console.error(err);
-       parseItemPagePromise(JSON.parse(data)).then((returnedData)=>{
-         fs.writeFile(`parsingFiles/7D/7d_${nameBrand.split('/')[0]}_Items.json`, JSON.stringify(returnedData), function(error){
-           if(error) throw error; // если возникла ошибка
-           console.error(`Запись файла ${nameBrand.split('/')[0]} завершена`);
-         })
-       });
-     })
- }
-
- function parseItemPagePromise(listData) {
-   return new Promise ((resolve, reject) => {
-     let listItems = {};
-     for (let key in listData) {
-       parseItemPage(listData[key])
-           .then((model) => {
-             listItems[key] = model;
-             if (Object.keys(listData).length === Object.keys(listItems).length) resolve(listItems)
-           })
-           .catch((err)=> {
-             console.error(err)
-             reject(err);
-           })
-     };
-   });
- }
-
- function parseItemPage(el) {
-   return new Promise((resolve, reject) => {
-       request(`https://7d.by/${el.url}`, (err, res, body) => {
-         if (err) reject(err);
-
-         let $ = cheerio.load(body);
-         let modelItem = {
-           name: $('h1').text(),
-           brand: el.name,
-           url: el.url,
-           count: {
-             rubl:$('#price .price').clone().children().remove().end().text(),
-             cops: $('#price .price').clone().children().text()
-           },
-           img: getImageURL(),
-           description: $('form #buttons~').text()
-         };
-         function getImageURL() {
-           const node = $('[data-fancybox="gallery"] img');
-           const listImageUrl =[];
-           node.map((index, el) => {
-             listImageUrl.push(`https://7d.by${el.attribs['src']}`);
-           });
-           return listImageUrl
-         }
-         resolve(modelItem)
-       })
-   })
- }
-
-
 
 module.exports = router;
