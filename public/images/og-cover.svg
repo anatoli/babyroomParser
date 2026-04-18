@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A0D23"/>
+      <stop offset="0.54" stop-color="#1A1E49"/>
+      <stop offset="1" stop-color="#101737"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="190" y1="130" x2="910" y2="510" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6F7BFF"/>
+      <stop offset="0.55" stop-color="#17D9FF"/>
+      <stop offset="1" stop-color="#32F5A9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="175" cy="95" r="240" fill="#6F7BFF" fill-opacity="0.22"/>
+  <circle cx="1060" cy="105" r="210" fill="#17D9FF" fill-opacity="0.18"/>
+  <circle cx="240" cy="565" r="190" fill="#32F5A9" fill-opacity="0.15"/>
+  <rect x="90" y="88" width="1020" height="454" rx="28" fill="#111735" fill-opacity="0.68" stroke="#FFFFFF" stroke-opacity="0.22"/>
+  <rect x="126" y="126" width="308" height="48" rx="24" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.26"/>
+  <text x="155" y="157" fill="#D9ECFF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600">AI Growth Studio</text>
+  <text x="126" y="248" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="700">AI integration for business</text>
+  <text x="126" y="304" fill="url(#accent)" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700">Nextbot + ElevenLabs + custom bots</text>
+  <text x="126" y="370" fill="#C3CEE9" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500">Automate sales, support and lead qualification 24/7</text>
+  <rect x="126" y="420" width="362" height="66" rx="16" fill="url(#accent)"/>
+  <text x="162" y="462" fill="#081126" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">Book AI strategy call</text>
+  <rect x="888" y="420" width="186" height="66" rx="16" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.2"/>
+  <text x="925" y="462" fill="#E9F4FF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">24/7</text>
+</svg>
