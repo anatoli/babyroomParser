@@ -24,6 +24,21 @@ body {
   line-height: 1.55;
 }
 
+.js-reveal {
+  opacity: 0;
+  transform: translateY(20px) scale(0.99);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.2, 0.75, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .page {
   width: min(1140px, calc(100% - 2.5rem));
   margin: 0 auto;
@@ -31,6 +46,8 @@ body {
 }
 
 .hero {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(145deg, #ffffff, #f8fbff);
   border: 1px solid var(--line);
   border-radius: 26px;
@@ -38,6 +55,46 @@ body {
   display: grid;
   grid-template-columns: 1.35fr 0.95fr;
   gap: 1.25rem;
+}
+
+.hero__fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__fx::before,
+.hero__fx::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(0.4px);
+  opacity: 0.7;
+}
+
+.hero__fx::before {
+  width: 360px;
+  height: 360px;
+  left: -110px;
+  top: -130px;
+  background: radial-gradient(circle, rgba(36, 93, 255, 0.24), rgba(36, 93, 255, 0) 65%);
+  animation: floatOrbLeft 12s ease-in-out infinite;
+}
+
+.hero__fx::after {
+  width: 320px;
+  height: 320px;
+  right: -90px;
+  bottom: -110px;
+  background: radial-gradient(circle, rgba(70, 146, 255, 0.2), rgba(70, 146, 255, 0) 70%);
+  animation: floatOrbRight 14s ease-in-out infinite;
+}
+
+.hero__content,
+.hero__panel {
+  position: relative;
+  z-index: 1;
 }
 
 .hero__eyebrow {
@@ -135,6 +192,7 @@ body {
   border-radius: 18px;
   background: var(--surface-soft);
   padding: 1.1rem;
+  box-shadow: 0 14px 35px rgba(18, 48, 120, 0.06);
 }
 
 .hero__panel h2 {
@@ -155,6 +213,13 @@ body {
   border-radius: 14px;
   border: 1px solid var(--line);
   background: var(--surface);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.metric:hover {
+  transform: translateY(-2px);
+  border-color: #c5d6fa;
+  box-shadow: 0 8px 18px rgba(22, 57, 135, 0.09);
 }
 
 .metric strong {
@@ -220,6 +285,13 @@ body {
   border-radius: 16px;
   background: var(--surface);
   padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #c8d8fa;
+  box-shadow: 0 10px 24px rgba(14, 44, 114, 0.08);
 }
 
 .card h3,
@@ -272,6 +344,13 @@ body {
   color: #355081;
   padding: 0.37rem 0.78rem;
   font-size: 0.9rem;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+  background: #edf4ff;
+  border-color: #bdd2fb;
 }
 
 .timeline {
@@ -305,6 +384,12 @@ body {
   border-radius: 14px;
   background: var(--surface);
   padding: 0.95rem 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline__item:hover .timeline__body {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(15, 50, 125, 0.08);
 }
 
 .timeline__body h3 {
@@ -337,6 +422,13 @@ body {
   background: var(--surface);
   color: #244072;
   font-size: 0.9rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  border-color: #c3d6fd;
+  background: #f4f8ff;
 }
 
 .legal-note {
@@ -390,6 +482,12 @@ body {
   border-radius: 14px;
   background: var(--surface);
   padding: 0.85rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq__item[open] {
+  border-color: #bfd3fb;
+  box-shadow: 0 10px 22px rgba(13, 47, 121, 0.08);
 }
 
 .faq__item summary {
@@ -457,6 +555,26 @@ body {
   font-size: 0.89rem;
 }
 
+@keyframes floatOrbLeft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(28px, 16px, 0);
+  }
+}
+
+@keyframes floatOrbRight {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-24px, -18px, 0);
+  }
+}
+
 @media (max-width: 1040px) {
   .hero {
     grid-template-columns: 1fr;
@@ -492,5 +610,25 @@ body {
 
   .surface--cta {
     align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero__fx::before,
+  .hero__fx::after,
+  .btn,
+  .card,
+  .metric,
+  .pill,
+  .chip,
+  .timeline__body {
+    animation: none;
+    transition: none;
   }
 }

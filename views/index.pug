@@ -3,7 +3,8 @@ extends layout
 block content
   main.page
     section.hero#top
-      .hero__content
+      .hero__fx(aria-hidden="true")
+      .hero__content.js-reveal(style="--reveal-delay: 40ms")
         span.hero__eyebrow AI Growth Studio
         h1 ИИ-менеджер продаж для Bitrix24 и amoCRM
         p.hero__subtitle= subtitle
@@ -16,81 +17,81 @@ block content
         ul.hero__trust
           each item in trustItems
             li= item
-      .hero__panel
+      .hero__panel.js-reveal(style="--reveal-delay: 120ms")
         h2 Ключевые ориентиры проекта
         ul.hero__metrics
-          each metric in heroMetrics
-            li.metric
+          each metric, index in heroMetrics
+            li.metric.js-reveal(style=`--reveal-delay: ${180 + (index * 70)}ms`)
               strong= metric.value
               span= metric.label
 
     section.section#results
-      .section__header
+      .section__header.js-reveal
         h2 Результат, который видит руководитель
         p.section__lead
           | ИИ-менеджер закрывает первичную коммуникацию с лидами, фиксирует данные в CRM и передает менеджеру клиента с контекстом.
           |  Команда продаж фокусируется на переговорах и закрытии сделок.
       .split
-        article.surface
+        article.surface.js-reveal(style="--reveal-delay: 40ms")
           h3 Типовые точки потерь
           ul.list
             each point in painPoints
               li= point
-        article.surface
+        article.surface.js-reveal(style="--reveal-delay: 110ms")
           h3 Что меняется после внедрения
           .grid.grid--2
-            each result in businessResults
-              article.card
+            each result, index in businessResults
+              article.card.js-reveal(style=`--reveal-delay: ${150 + (index * 55)}ms`)
                 h4= result.title
                 p= result.description
 
     section.section#capabilities
-      .section__header
+      .section__header.js-reveal
         h2 Что делает ИИ-менеджер
         p.section__lead Автоматизируем не чат-бота, а рабочий участок воронки продаж.
       .grid.grid--3
-        each capability in capabilities
-          article.card
+        each capability, index in capabilities
+          article.card.js-reveal(style=`--reveal-delay: ${40 + (index * 55)}ms`)
             h3= capability.title
             p= capability.description
 
     section.section#audience
-      .section__header
+      .section__header.js-reveal
         h2 Для каких компаний решение особенно полезно
         p.section__lead Если у вас регулярный входящий поток и часть заявок остывает до контакта с менеджером, это зона максимального эффекта.
       .pill-list
-        each item in audience
-          span.pill= item
+        each item, index in audience
+          span.pill.js-reveal(style=`--reveal-delay: ${40 + (index * 40)}ms`)= item
 
     section.section#process
-      .section__header
+      .section__header.js-reveal
         h2 Как проходит внедрение
         p.section__lead Пошаговый запуск с понятной зоной ответственности и контролем результата.
       .timeline
         each step, index in implementation
-          article.timeline__item
-            .timeline__badge= index + 1
+          article.timeline__item.js-reveal(style=`--reveal-delay: ${40 + (index * 60)}ms`)
+            .timeline__badge.js-reveal(style=`--reveal-delay: ${70 + (index * 60)}ms`)= index + 1
             .timeline__body
               h3= step.title
               p.timeline__period= step.period
               p= step.description
 
     section.section#integrations
-      .section__header
+      .section__header.js-reveal
         h2 Интеграции и подключение к инфраструктуре
         p.section__lead Встраиваем решение в текущий контур, без ломки существующих процессов.
       .chips
-        each integration in integrations
-          span.chip= integration
-      p.legal-note= legalNote
+        each integration, index in integrations
+          span.chip.js-reveal(style=`--reveal-delay: ${40 + (index * 35)}ms`)= integration
+      p.legal-note.js-reveal= legalNote
 
     section.section#cases
-      .section__header
+      .section__header.js-reveal
         h2 Кейсы и измеримая эффективность
         p.section__lead Сравниваем до/после по скорости ответа, качеству обработки лидов и конверсии в следующий этап воронки.
       .grid.grid--3
-        each entry in cases
-          article.card.card--case
+        each entry, index in cases
+          article.card.card--case.js-reveal(style=`--reveal-delay: ${40 + (index * 70)}ms`)
             h3= entry.title
             p.card__summary= entry.summary
             ul.card__bullets
@@ -98,23 +99,23 @@ block content
                 li= point
 
     section.section#economics
-      .section__header
+      .section__header.js-reveal
         h2 Экономика внедрения
         p.section__lead
           | Фиксируем базовые метрики на старте и считаем эффект в цифрах: скорость первого ответа, доля обработанных лидов,
           |  нагрузка на менеджеров и конверсия по этапам.
-      article.surface.surface--cta
+      article.surface.surface--cta.js-reveal(style="--reveal-delay: 40ms")
         h3 Получите расчет под вашу воронку
         p Разберем текущую обработку лидов и покажем, где ИИ-менеджер дает максимальный операционный и коммерческий эффект.
         a.btn.btn--primary(href="#contact") Запросить расчет
 
     section.section#plans
-      .section__header
+      .section__header.js-reveal
         h2 Форматы сотрудничества
         p.section__lead Выбираем конфигурацию под объем заявок, сложность сценариев и требования к поддержке.
       .grid.grid--3
-        each plan in plans
-          article.card.card--plan
+        each plan, index in plans
+          article.card.card--plan.js-reveal(style=`--reveal-delay: ${40 + (index * 70)}ms`)
             h3= plan.name
             p.card__summary= plan.target
             ul.card__bullets
@@ -122,26 +123,26 @@ block content
                 li= feature
 
     section.section#security
-      .section__header
+      .section__header.js-reveal
         h2 Безопасность и договор
         p.section__lead Юридическая и техническая прозрачность на каждом этапе проекта.
-      article.surface
+      article.surface.js-reveal(style="--reveal-delay: 40ms")
         ul.list
           each point in securityPoints
             li= point
 
     section.section#faq
-      .section__header
+      .section__header.js-reveal
         h2 Частые вопросы
       .faq
-        each entry in faqs
-          details.faq__item
+        each entry, index in faqs
+          details.faq__item.js-reveal(style=`--reveal-delay: ${40 + (index * 45)}ms`)
             summary= entry.question
             p= entry.answer
 
     section.section#contact
-      .contact
-        .contact__content
+      .contact.js-reveal
+        .contact__content.js-reveal(style="--reveal-delay: 50ms")
           h2 Покажем, как ИИ-менеджер будет работать в вашей воронке
           p На консультации разберем текущую обработку лидов и предложим сценарий пилота с измеримыми KPI.
           .contact__actions
@@ -150,7 +151,7 @@ block content
           p.contact__line
             | Email: 
             a(href="mailto:" + contacts.email)= contacts.email
-        .contact__note
+        .contact__note.js-reveal(style="--reveal-delay: 110ms")
           h3 Что подготовить к встрече
           ul.list
             li Краткое описание текущей воронки и каналов продаж.
