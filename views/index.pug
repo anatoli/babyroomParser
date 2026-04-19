@@ -2,46 +2,158 @@ extends layout
 
 block content
   main.page
-    section.hero
-      .hero__main
-        span.hero__badge AI Automation Studio
-        h1= title
-        p= subtitle
+    section.hero#top
+      .hero__content
+        span.hero__eyebrow AI Growth Studio
+        h1 ИИ-менеджер продаж для Bitrix24 и amoCRM
+        p.hero__subtitle= subtitle
+        p.hero__description
+          | Внедряем ИИ-менеджера под ваши процессы: от первого сообщения до передачи в сделку.
+          |  Без коробочных шаблонов, с прозрачными KPI и контролем качества диалогов.
         .hero__actions
-          a.btn.btn--primary(href="#contact") Запросить стратегию
-          a.btn.btn--ghost(href="#services") Посмотреть услуги
-      .hero__metrics
-        each metric in metrics
-          .metric
-            strong= metric.value
-            span= metric.label
+          a.btn.btn--primary(href="#contact") Получить демо на моем кейсе
+          a.btn.btn--secondary(href="#economics") Рассчитать экономику
+        ul.hero__trust
+          each item in trustItems
+            li= item
+      .hero__panel
+        h2 Ключевые ориентиры проекта
+        ul.hero__metrics
+          each metric in heroMetrics
+            li.metric
+              strong= metric.value
+              span= metric.label
 
-    section.section#services
-      h2 Ключевые компетенции команды
-      p.section__lead Мы строим решения под KPI бизнеса: больше заявок, выше конверсия и меньше рутинной нагрузки на сотрудников.
+    section.section#results
+      .section__header
+        h2 Результат, который видит руководитель
+        p.section__lead
+          | ИИ-менеджер закрывает первичную коммуникацию с лидами, фиксирует данные в CRM и передает менеджеру клиента с контекстом.
+          |  Команда продаж фокусируется на переговорах и закрытии сделок.
+      .split
+        article.surface
+          h3 Типовые точки потерь
+          ul.list
+            each point in painPoints
+              li= point
+        article.surface
+          h3 Что меняется после внедрения
+          .grid.grid--2
+            each result in businessResults
+              article.card
+                h4= result.title
+                p= result.description
+
+    section.section#capabilities
+      .section__header
+        h2 Что делает ИИ-менеджер
+        p.section__lead Автоматизируем не чат-бота, а рабочий участок воронки продаж.
       .grid.grid--3
-        each service in services
+        each capability in capabilities
           article.card
-            h3= service.title
-            p= service.description
+            h3= capability.title
+            p= capability.description
 
-    section.section.section--process
-      h2 Как проходит внедрение
-      ul.checklist
-        each step in process
-          li= step
+    section.section#audience
+      .section__header
+        h2 Для каких компаний решение особенно полезно
+        p.section__lead Если у вас регулярный входящий поток и часть заявок остывает до контакта с менеджером, это зона максимального эффекта.
+      .pill-list
+        each item in audience
+          span.pill= item
 
-    section.section
-      h2 Что вы получаете
+    section.section#process
+      .section__header
+        h2 Как проходит внедрение
+        p.section__lead Пошаговый запуск с понятной зоной ответственности и контролем результата.
+      .timeline
+        each step, index in implementation
+          article.timeline__item
+            .timeline__badge= index + 1
+            .timeline__body
+              h3= step.title
+              p.timeline__period= step.period
+              p= step.description
+
+    section.section#integrations
+      .section__header
+        h2 Интеграции и подключение к инфраструктуре
+        p.section__lead Встраиваем решение в текущий контур, без ломки существующих процессов.
+      .chips
+        each integration in integrations
+          span.chip= integration
+      p.legal-note= legalNote
+
+    section.section#cases
+      .section__header
+        h2 Кейсы и измеримая эффективность
+        p.section__lead Сравниваем до/после по скорости ответа, качеству обработки лидов и конверсии в следующий этап воронки.
       .grid.grid--3
-        each item in highlights
-          article.card
-            h3 Результат
-            p= item
+        each entry in cases
+          article.card.card--case
+            h3= entry.title
+            p.card__summary= entry.summary
+            ul.card__bullets
+              each point in entry.points
+                li= point
+
+    section.section#economics
+      .section__header
+        h2 Экономика внедрения
+        p.section__lead
+          | Фиксируем базовые метрики на старте и считаем эффект в цифрах: скорость первого ответа, доля обработанных лидов,
+          |  нагрузка на менеджеров и конверсия по этапам.
+      article.surface.surface--cta
+        h3 Получите расчет под вашу воронку
+        p Разберем текущую обработку лидов и покажем, где ИИ-менеджер дает максимальный операционный и коммерческий эффект.
+        a.btn.btn--primary(href="#contact") Запросить расчет
+
+    section.section#plans
+      .section__header
+        h2 Форматы сотрудничества
+        p.section__lead Выбираем конфигурацию под объем заявок, сложность сценариев и требования к поддержке.
+      .grid.grid--3
+        each plan in plans
+          article.card.card--plan
+            h3= plan.name
+            p.card__summary= plan.target
+            ul.card__bullets
+              each feature in plan.features
+                li= feature
+
+    section.section#security
+      .section__header
+        h2 Безопасность и договор
+        p.section__lead Юридическая и техническая прозрачность на каждом этапе проекта.
+      article.surface
+        ul.list
+          each point in securityPoints
+            li= point
+
+    section.section#faq
+      .section__header
+        h2 Частые вопросы
+      .faq
+        each entry in faqs
+          details.faq__item
+            summary= entry.question
+            p= entry.answer
 
     section.section#contact
-      .cta
-        h2 Запустим AI-агента, который начнет приносить заявки уже на первом этапе
-        p Мы фокусируемся на внедрении, которое окупается: измеримые KPI, прозрачный pipeline и поддержка после релиза.
-        p.cta__line hello@ai-growth.studio
-      p.footer AI Growth Studio · Nextbot · ElevenLabs · Персональные AI-боты
+      .contact
+        .contact__content
+          h2 Покажем, как ИИ-менеджер будет работать в вашей воронке
+          p На консультации разберем текущую обработку лидов и предложим сценарий пилота с измеримыми KPI.
+          .contact__actions
+            a.btn.btn--primary(href=contacts.telegram target="_blank" rel="noopener noreferrer") Получить персональное демо
+            a.btn.btn--secondary(href="mailto:" + contacts.email) Написать на email
+          p.contact__line
+            | Email: 
+            a(href="mailto:" + contacts.email)= contacts.email
+        .contact__note
+          h3 Что подготовить к встрече
+          ul.list
+            li Краткое описание текущей воронки и каналов продаж.
+            li Пример скриптов или базы знаний (если есть).
+            li Доступ к CRM на демо-уровне или скриншоты этапов.
+      p.footer AI Growth Studio · ИИ-менеджеры продаж для CRM и мессенджеров

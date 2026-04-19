@@ -6,6 +6,7 @@ html(lang='ru')
     - var metaKeywords = seo && seo.keywords ? seo.keywords : 'интеграция ai агентов, nextbot, elevenlabs, ai боты для бизнеса'
     - var metaRobots = seo && seo.robots ? seo.robots : 'index, follow'
     - var canonicalHref = seo && seo.canonical ? seo.canonical : ''
+    - var metaThemeColor = seo && seo.themeColor ? seo.themeColor : '#f3f6fb'
     - var metaOgType = seo && seo.ogType ? seo.ogType : 'website'
     - var metaOgLocale = seo && seo.locale ? seo.locale : 'ru_RU'
     - var metaOgTitle = seo && seo.ogTitle ? seo.ogTitle : metaTitle
@@ -24,7 +25,7 @@ html(lang='ru')
     meta(name='keywords', content=metaKeywords)
     meta(name='robots', content=metaRobots)
     meta(name='googlebot', content=metaRobots)
-    meta(name='theme-color', content='#090812')
+    meta(name='theme-color', content=metaThemeColor)
     if canonicalHref
       link(rel='canonical', href=canonicalHref)
     meta(property='og:type', content=metaOgType)
