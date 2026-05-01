@@ -79,16 +79,25 @@ router.get('/', function(req, res) {
     structuredData: JSON.stringify(buildStructuredData(baseUrl)),
     heroMetrics: [
       {
-        value: '5-15 сек',
-        label: 'время первого ответа клиенту'
+        value: 'до 15 сек',
+        label: 'время первого ответа клиенту',
+        counter: 15,
+        prefix: 'до ',
+        suffix: ' сек'
       },
       {
         value: 'до 80%',
-        label: 'рутинных диалогов без участия менеджера'
+        label: 'рутинных диалогов без участия менеджера',
+        counter: 80,
+        prefix: 'до ',
+        suffix: '%'
       },
       {
         value: '24/7',
-        label: 'обработка обращений в любом канале'
+        label: 'обработка обращений в любом канале',
+        counter: 24,
+        prefix: '',
+        suffix: '/7'
       }
     ],
     trustItems: [

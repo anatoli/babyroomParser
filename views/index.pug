@@ -4,7 +4,7 @@ block content
   main.page
     section.hero#top
       .hero__fx(aria-hidden="true")
-      .hero__content.js-reveal(style="--reveal-delay: 40ms")
+      .hero__content.js-reveal.js-hero-parallax(style="--reveal-delay: 40ms")
         span.hero__eyebrow AI Growth Studio
         h1 ИИ-менеджер продаж для Bitrix24 и amoCRM
         p.hero__subtitle= subtitle
@@ -17,12 +17,16 @@ block content
         ul.hero__trust
           each item in trustItems
             li= item
-      .hero__panel.js-reveal(style="--reveal-delay: 120ms")
+      .hero__panel.js-reveal.js-hero-parallax(style="--reveal-delay: 120ms")
         h2 Ключевые ориентиры проекта
         ul.hero__metrics
           each metric, index in heroMetrics
-            li.metric.js-reveal(style=`--reveal-delay: ${180 + (index * 70)}ms`)
-              strong= metric.value
+            li.metric.js-reveal.js-hero-parallax(style=`--reveal-delay: ${180 + (index * 70)}ms`)
+              strong.metric__value(
+                data-counter=(typeof metric.counter !== 'undefined' ? metric.counter : ''),
+                data-prefix=(typeof metric.prefix !== 'undefined' ? metric.prefix : ''),
+                data-suffix=(typeof metric.suffix !== 'undefined' ? metric.suffix : '')
+              )= metric.value
               span= metric.label
 
     section.section#results
