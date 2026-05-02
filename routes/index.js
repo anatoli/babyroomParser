@@ -14,9 +14,9 @@ function buildStructuredData(baseUrl) {
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'AI Growth Studio',
+      name: 'AI Bot Studio',
       url: baseUrl,
-      email: 'hello@ai-growth.studio',
+      email: 'hello@aibotstudio.info',
       sameAs: [
         baseUrl
       ]
@@ -24,7 +24,7 @@ function buildStructuredData(baseUrl) {
     {
       '@context': 'https://schema.org',
       '@type': 'ProfessionalService',
-      name: 'AI Growth Studio',
+      name: 'AI Bot Studio',
       description: 'Внедрение ИИ-менеджеров продаж для CRM и мессенджеров.',
       areaServed: 'Worldwide',
       serviceType: 'AI sales manager implementation',
@@ -36,7 +36,7 @@ function buildStructuredData(baseUrl) {
       name: 'Внедрение ИИ-менеджера продаж',
       provider: {
         '@type': 'Organization',
-        name: 'AI Growth Studio'
+        name: 'AI Bot Studio'
       },
       serviceType: 'Автоматизация первичной воронки продаж',
       offers: {
@@ -50,7 +50,7 @@ function buildStructuredData(baseUrl) {
 router.get('/', function(req, res) {
   var baseUrl = getBaseUrl(req);
   var canonicalUrl = baseUrl + '/';
-  var pageTitle = 'ИИ-менеджер продаж для Bitrix24 и amoCRM | AI Growth Studio';
+  var pageTitle = 'ИИ-менеджер продаж для Bitrix24 и amoCRM | AI Bot Studio';
   var pageDescription = 'Внедряем ИИ-менеджера продаж под ваши процессы: быстрые ответы, квалификация лидов, автоматическое заполнение CRM и прозрачные KPI.';
 
   res.render('index', {
@@ -61,10 +61,10 @@ router.get('/', function(req, res) {
       description: pageDescription,
       canonical: canonicalUrl,
       robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-      author: 'AI Growth Studio',
+      author: 'AI Bot Studio',
       themeColor: '#090812',
       keywords: 'ии менеджер продаж, bitrix24 ai, amocrm ai, автоматизация отдела продаж, ai воронка продаж',
-      siteName: 'AI Growth Studio',
+      siteName: 'AI Bot Studio',
       locale: 'ru_RU',
       ogType: 'website',
       ogTitle: pageTitle,
@@ -264,7 +264,7 @@ router.get('/', function(req, res) {
       }
     ],
     contacts: {
-      email: 'hello@ai-growth.studio',
+      email: 'hello@aibotstudio.info',
       telegram: 'https://t.me/m/Q_flhooMNmYy'
     },
     legalNote: '*Meta Platforms Inc. признана экстремистской организацией и запрещена на территории РФ.'
