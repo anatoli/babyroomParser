@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anatoli.github.io/babyroomParser/sitemap.xml
+Sitemap: https://aibotstudio.info/sitemap.xml

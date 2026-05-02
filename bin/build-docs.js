@@ -8,7 +8,7 @@ const app = require('../app');
 const outputDir = path.resolve(__dirname, '..', 'docs');
 const outputStylesDir = path.join(outputDir, 'stylesheets');
 const outputImagesDir = path.join(outputDir, 'images');
-const pagesBaseUrl = 'https://anatoli.github.io/babyroomParser/';
+const pagesBaseUrl = 'https://aibotstudio.info/';
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -16,7 +16,7 @@ function ensureDir(dirPath) {
 
 function writeStaticFiles(renderedHtml) {
   const normalizedHtml = renderedHtml
-    .replaceAll('https://anatoli.github.io/', pagesBaseUrl)
+    .replaceAll('https://aibotstudio.info/', pagesBaseUrl)
     .replace('href="/stylesheets/style.css"', 'href="./stylesheets/style.css"');
 
   ensureDir(outputDir);
@@ -63,7 +63,7 @@ function build() {
         path: '/',
         method: 'GET',
         headers: {
-          Host: 'anatoli.github.io',
+          Host: 'aibotstudio.info',
           'X-Forwarded-Proto': 'https'
         }
       },
