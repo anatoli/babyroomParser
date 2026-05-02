@@ -1,12 +1,12 @@
 :root {
-  --bg: #f3f6fb;
-  --surface: #ffffff;
-  --surface-soft: #f8faff;
-  --text: #12213e;
-  --muted: #5f6f8f;
-  --line: #d7e1f2;
-  --primary: #245dff;
-  --primary-strong: #1b46be;
+  --bg: #090812;
+  --surface: rgba(20, 20, 38, 0.78);
+  --surface-soft: rgba(28, 30, 52, 0.82);
+  --text: #f5f8ff;
+  --muted: #b7c2df;
+  --line: rgba(255, 255, 255, 0.12);
+  --primary: #6f7bff;
+  --primary-strong: #4f62ff;
 }
 
 * {
@@ -53,7 +53,7 @@ body {
 .hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(145deg, #ffffff, #f8fbff);
+  background: linear-gradient(135deg, rgba(111, 123, 255, 0.14), rgba(23, 217, 255, 0.1));
   border: 1px solid var(--line);
   border-radius: 26px;
   padding: 2rem;
@@ -83,7 +83,7 @@ body {
   height: 360px;
   left: -110px;
   top: -130px;
-  background: radial-gradient(circle, rgba(36, 93, 255, 0.24), rgba(36, 93, 255, 0) 65%);
+  background: radial-gradient(circle, rgba(111, 123, 255, 0.3), rgba(111, 123, 255, 0) 65%);
   animation: floatOrbLeft 12s ease-in-out infinite;
 }
 
@@ -92,7 +92,7 @@ body {
   height: 320px;
   right: -90px;
   bottom: -110px;
-  background: radial-gradient(circle, rgba(70, 146, 255, 0.2), rgba(70, 146, 255, 0) 70%);
+  background: radial-gradient(circle, rgba(23, 217, 255, 0.22), rgba(23, 217, 255, 0) 70%);
   animation: floatOrbRight 14s ease-in-out infinite;
 }
 
@@ -105,11 +105,11 @@ body {
 .hero__eyebrow {
   display: inline-flex;
   align-items: center;
-  border: 1px solid #c2d4ff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   padding: 0.3rem 0.75rem;
-  color: var(--primary-strong);
-  background: #edf3ff;
+  color: #dcf7ff;
+  background: rgba(255, 255, 255, 0.12);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -124,7 +124,7 @@ body {
 
 .hero__subtitle {
   margin: 0;
-  color: #1d355f;
+  color: #d9e2ff;
   font-weight: 600;
 }
 
@@ -169,9 +169,9 @@ body {
 }
 
 .btn--secondary {
-  background: #ffffff;
-  color: var(--primary-strong);
-  border-color: #c8d7fa;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e8eeff;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .hero__trust {
@@ -184,12 +184,12 @@ body {
 }
 
 .hero__trust li {
-  border: 1px solid #d6e2fa;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
   padding: 0.25rem 0.65rem;
   font-size: 0.85rem;
-  color: #355084;
-  background: #f5f9ff;
+  color: #d7e5ff;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .hero__panel {
@@ -197,7 +197,7 @@ body {
   border-radius: 18px;
   background: var(--surface-soft);
   padding: 1.1rem;
-  box-shadow: 0 14px 35px rgba(18, 48, 120, 0.06);
+  box-shadow: 0 14px 35px rgba(5, 9, 29, 0.35);
 }
 
 .hero__panel h2 {
@@ -223,8 +223,8 @@ body {
 
 .metric:hover {
   transform: translateY(-2px);
-  border-color: #c5d6fa;
-  box-shadow: 0 8px 18px rgba(22, 57, 135, 0.09);
+  border-color: rgba(111, 123, 255, 0.52);
+  box-shadow: 0 8px 18px rgba(6, 11, 35, 0.38);
 }
 
 .metric strong {
@@ -295,8 +295,8 @@ body {
 
 .card:hover {
   transform: translateY(-2px);
-  border-color: #c8d8fa;
-  box-shadow: 0 10px 24px rgba(14, 44, 114, 0.08);
+  border-color: rgba(111, 123, 255, 0.52);
+  box-shadow: 0 10px 24px rgba(6, 11, 35, 0.38);
 }
 
 .card h3,
@@ -343,10 +343,10 @@ body {
 }
 
 .pill {
-  border: 1px solid #cddcf8;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
-  background: #f8fbff;
-  color: #355081;
+  background: rgba(255, 255, 255, 0.06);
+  color: #d7e5ff;
   padding: 0.37rem 0.78rem;
   font-size: 0.9rem;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
@@ -354,8 +354,8 @@ body {
 
 .pill:hover {
   transform: translateY(-1px);
-  background: #edf4ff;
-  border-color: #bdd2fb;
+  background: rgba(111, 123, 255, 0.2);
+  border-color: rgba(111, 123, 255, 0.52);
 }
 
 .timeline {
@@ -375,9 +375,9 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: #e8efff;
-  border: 1px solid #c2d4ff;
-  color: var(--primary-strong);
+  background: rgba(111, 123, 255, 0.22);
+  border: 1px solid rgba(111, 123, 255, 0.45);
+  color: #dce6ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -394,7 +394,7 @@ body {
 
 .timeline__item:hover .timeline__body {
   transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(15, 50, 125, 0.08);
+  box-shadow: 0 8px 22px rgba(5, 10, 31, 0.4);
 }
 
 .timeline__body h3 {
@@ -404,7 +404,7 @@ body {
 
 .timeline__period {
   margin: 0.3rem 0 0;
-  color: #2f538e;
+  color: #9db4ff;
   font-weight: 600;
 }
 
@@ -425,20 +425,20 @@ body {
   border-radius: 999px;
   padding: 0.34rem 0.74rem;
   background: var(--surface);
-  color: #244072;
+  color: #d7e5ff;
   font-size: 0.9rem;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .chip:hover {
   transform: translateY(-1px);
-  border-color: #c3d6fd;
-  background: #f4f8ff;
+  border-color: rgba(111, 123, 255, 0.52);
+  background: rgba(111, 123, 255, 0.16);
 }
 
 .legal-note {
   margin-top: 0.8rem;
-  color: #7382a2;
+  color: #9fa9c7;
   font-size: 0.83rem;
 }
 
@@ -491,8 +491,8 @@ body {
 }
 
 .faq__item[open] {
-  border-color: #bfd3fb;
-  box-shadow: 0 10px 22px rgba(13, 47, 121, 0.08);
+  border-color: rgba(111, 123, 255, 0.52);
+  box-shadow: 0 10px 22px rgba(6, 11, 35, 0.4);
 }
 
 .faq__item summary {
@@ -506,9 +506,9 @@ body {
 }
 
 .contact {
-  border: 1px solid #c7d8ff;
+  border: 1px solid rgba(111, 123, 255, 0.35);
   border-radius: 24px;
-  background: linear-gradient(140deg, #eef4ff, #f9fbff);
+  background: linear-gradient(130deg, rgba(111, 123, 255, 0.2), rgba(23, 217, 255, 0.16));
   padding: 1.3rem;
   display: grid;
   gap: 1rem;
@@ -522,7 +522,7 @@ body {
 
 .contact__content p {
   margin: 0.65rem 0 0;
-  color: #355081;
+  color: #dde7ff;
 }
 
 .contact__actions {
@@ -537,15 +537,15 @@ body {
 }
 
 .contact__line a {
-  color: var(--primary-strong);
+  color: #e6ecff;
   text-decoration: none;
   font-weight: 700;
 }
 
 .contact__note {
-  border: 1px solid #cfddfb;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 16px;
-  background: #ffffff;
+  background: rgba(20, 20, 38, 0.78);
   padding: 0.9rem 1rem;
 }
 
@@ -556,7 +556,7 @@ body {
 
 .footer {
   margin-top: 1rem;
-  color: #6f7f9f;
+  color: #9fa9c7;
   font-size: 0.89rem;
 }
 
