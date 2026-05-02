@@ -62,7 +62,7 @@ router.get('/', function(req, res) {
       canonical: canonicalUrl,
       robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
       author: 'AI Growth Studio',
-      themeColor: '#f2f4fb',
+      themeColor: '#090812',
       keywords: 'ии менеджер продаж, bitrix24 ai, amocrm ai, автоматизация отдела продаж, ai воронка продаж',
       siteName: 'AI Growth Studio',
       locale: 'ru_RU',
