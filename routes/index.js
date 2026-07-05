@@ -16,9 +16,10 @@ function buildStructuredData(baseUrl) {
       '@type': 'Organization',
       name: 'AI Bot Studio',
       url: baseUrl,
-      email: 'hello@aibotstudio.info',
+      email: 'anatoli.arynovich@gmail.com',
       sameAs: [
-        baseUrl
+        baseUrl,
+        'https://t.me/anatoli7383'
       ]
     },
     {
@@ -264,8 +265,8 @@ router.get('/', function(req, res) {
       }
     ],
     contacts: {
-      email: 'hello@aibotstudio.info',
-      telegram: 'https://t.me/m/Q_flhooMNmYy'
+      email: 'anatoli.arynovich@gmail.com',
+      telegram: 'https://t.me/anatoli7383'
     },
     legalNote: '*Meta Platforms Inc. признана экстремистской организацией и запрещена на территории РФ.'
   });
